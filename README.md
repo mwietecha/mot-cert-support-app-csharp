@@ -16,3 +16,5 @@ dotnet run
 ```
 
 Once complete, the application will be available via http://localhost:8080
+
+Have fun 😬
