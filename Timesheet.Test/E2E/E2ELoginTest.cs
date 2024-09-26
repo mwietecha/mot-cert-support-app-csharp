@@ -11,7 +11,11 @@ class E2ELoginTest
     public void TestLoginReturnsCorrectPage()
     {
         new DriverManager().SetUpDriver(new ChromeConfig());
-        IWebDriver _webDriver = new ChromeDriver();
+
+        ChromeOptions chromeOptions = new();
+        chromeOptions.AddArgument("--headless=new");
+
+        IWebDriver _webDriver = new ChromeDriver(chromeOptions);
 
         _webDriver.Navigate().GoToUrl("http://localhost:8080");
         _webDriver.FindElement(By.Name("email")).SendKeys("admin@test.com");
@@ -25,7 +29,7 @@ class E2ELoginTest
 
         Assert.That(title, Is.EqualTo("Projects"));
 
-        _webDriver.Close();  
+        _webDriver.Close();
         _webDriver.Quit();
     }
 }

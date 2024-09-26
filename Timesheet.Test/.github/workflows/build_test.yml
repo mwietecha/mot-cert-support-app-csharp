@@ -1,0 +1,21 @@
+name: CSharp CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+            dotnet-version: '8.0.x'
+      - name: Run unit checks
+        run: dotnet test Timesheet.Test -- filter FullyQualifiedName~Timesheet.Test.Unit
+      - name: Run integration and E2E checks
+        run: |
+          dotnet run --project Timesheet &
+          sleep 10 &&
+          dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.API
+          dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.E2E
