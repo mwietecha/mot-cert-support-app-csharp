@@ -12,7 +12,7 @@ jobs:
         with:
             dotnet-version: '8.0.x'
       - name: Run unit checks
-        run: dotnet test Timesheet.Test -- filter FullyQualifiedName~Timesheet.Test.Unit
+        run: dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.Unit
       - name: Run integration and E2E checks
         run: |
           dotnet run --project Timesheet &
