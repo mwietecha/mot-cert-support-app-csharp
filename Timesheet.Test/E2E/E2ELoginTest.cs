@@ -13,7 +13,7 @@ class E2ELoginTest
         new DriverManager().SetUpDriver(new ChromeConfig());
 
         ChromeOptions chromeOptions = new();
-        chromeOptions.AddArgument("--headless=new");
+        chromeOptions.AddArgument("--headless");
 
         IWebDriver _webDriver = new ChromeDriver(chromeOptions);
 
