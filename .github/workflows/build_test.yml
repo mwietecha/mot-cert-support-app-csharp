@@ -12,10 +12,16 @@ jobs:
         with:
             dotnet-version: '8.0.x'
       - name: Run unit checks
-        run: dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.Unit
+        run: dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.Unit --logger trx --results-directory ./test-results
       - name: Run integration and E2E checks
         run: |
           dotnet run --project Timesheet &
           sleep 10 &&
-          dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.Api
-          dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.E2E
+          dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.Api --logger trx --results-directory ./test-results
+          dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.E2E --logger trx --results-directory ./test-results
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        if: always()
+        with:
+          files: |
+            test-results/*.trx
