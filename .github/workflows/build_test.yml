@@ -16,7 +16,7 @@ jobs:
       - name: Run integration and E2E checks
         run: |
           dotnet run --project Timesheet &
-          sleep 10 &&
+          sleep 30 &&
           dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.Api --logger trx --results-directory ./test-results
           dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.E2E --logger trx --results-directory ./test-results
       - name: Publish Test Results
