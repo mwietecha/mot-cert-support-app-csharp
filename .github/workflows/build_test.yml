@@ -4,7 +4,7 @@ on: push
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -20,7 +20,7 @@ jobs:
           dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.Api --logger trx --results-directory ./test-results
           dotnet test Timesheet.Test --filter FullyQualifiedName~Timesheet.Test.E2E --logger trx --results-directory ./test-results
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action/windows@v2
+        uses: EnricoMi/publish-unit-test-result-action/macos@v2
         if: always()
         with:
           files: |
